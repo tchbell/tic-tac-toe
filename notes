@@ -1,1 +1,6 @@
 Notes
+Cell function
+When a cell is clicked on it gains a X mark.
+Then create logic for two people.
+if its player one turn place X if player 2 place O
+make sure you can not place over a cell that has already been picked.
