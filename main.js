@@ -1,4 +1,27 @@
 const board = document.querySelector('.board');
+
+//select player symbol
+let xSymbol = document.querySelector('.xSymbol');
+let oSymbol = document.querySelector('.oSymbol');
+let symbolDiv = document.querySelector('.pickSymbol');
+
+xSymbol.addEventListener('click', function(){
+  p1.mySymbol = "X";
+  computer.mySymbol = "O";
+  //Make div with symbol picking invisible
+  symbolDiv.style.opacity= 0;
+  symbolDiv.style.visibility="none";
+});
+oSymbol.addEventListener('click', function(){
+  p1.mySymbol = "O";
+  computer.mySymbol = "X";
+
+  symbolDiv.style.opacity= 0;
+  symbolDiv.style.visibility="none";
+});
+
+
+
 //holds all the possible square values
 let boardContents = [1,2,3,4,5,6,7,8,9];
 //Set up click listener to change cells to X or O depending on player
@@ -9,7 +32,7 @@ board.addEventListener('click',function(e){
     //cell is clicked and thats id is set to square
     let square = parseInt(e.target.id);
   //change the cell that was clicked's innerHTML to X
-    e.target.innerHTML = 'X';
+    e.target.innerHTML = p1.mySymbol;
     //take that id and push it into p1myCells
     p1.myCells.push(e.target.id);
     //take board contents and remove the index of the id that was selected
@@ -21,7 +44,7 @@ board.addEventListener('click',function(e){
       //pick a random number between 0 and the length of boardcontents
       let box =  Math.floor(Math.random() * boardContents.length);
       // change the html of the cell with the id that match the random number picked
-        document.getElementById(boardContents[box]).innerHTML = "O";
+        document.getElementById(boardContents[box]).innerHTML = computer.mySymbol;
         computer.myCells.push(boardContents[box]);
         winningCombo(computer.myCells);
         //then take away that number from board contents
@@ -43,6 +66,8 @@ const clearBoard = function(){
 }
 let reset = document.querySelector('.restart');
 reset.addEventListener('click', function(){
+  symbolDiv.style.opacity = 1;
+  symbolDiv.style.visibility= "visible";
   clearBoard();
 
 })
@@ -90,10 +115,10 @@ const winningCombo = function check(array){
 
 //holds player moves in myCells that is then later checked by the winningCombo function
 const p1 = {
-  myTurn : true,
+  mySymbol : "X",
   myCells: []
 }
 const computer = {
-  myTurn : false,
+  mySymbol : "O",
   myCells: []
 }
